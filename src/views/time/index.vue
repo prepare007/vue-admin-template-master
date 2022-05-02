@@ -401,10 +401,12 @@ body {
   position: absolute;
 }
 button {
+  margin-left: 60px;
   width: 15%;
   color: red;
   background: antiquewhite;
   border-radius: 10px;
+  margin-top: 40px;
 }
 
 </style>
