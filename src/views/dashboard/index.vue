@@ -1,6 +1,6 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-text">亲爱的猪猪，欢迎回来！</div>
+    <div class="dashboard-text">亲爱的朱玲莉，欢迎回来！</div>
   </div>
 </template>
 
@@ -25,6 +25,7 @@ export default {
   &-text {
     font-size: 30px;
     line-height: 46px;
+    text-align: center;
   }
 }
 </style>

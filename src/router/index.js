@@ -51,7 +51,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
+      meta: { title: '首页', icon: 'dashboard' }
     }]
   },
 
@@ -84,7 +84,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'table',
         component: () => import('@/views/table/index'),
-        meta: { title: 'Table', icon: 'table' }
+        meta: { title: '我的读书', icon: 'table' }
       }
     ]
   },
@@ -96,7 +96,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'Form',
         component: () => import('@/views/form/index'),
-        meta: { title: 'addBook', icon: 'form' }
+        meta: { title: '添加新书', icon: 'el-icon-plus' }
       }
     ]
   },
@@ -108,7 +108,7 @@ export const constantRoutes = [
         path: 'index',
         name: 'record',
         component: () => import('@/views/read_record/index'),
-        meta: { title: 'record', icon: 'form' }
+        meta: { title: '阅读记录', icon: 'form' }
       }
     ]
   },
@@ -120,11 +120,11 @@ export const constantRoutes = [
         path: 'index',
         name: 'Time',
         component: () => import('@/views/time/index'),
-        meta: { title: 'Time', icon: 'form' }
+        meta: { title: '开始计时', icon: 'el-icon-time' }
       }
     ]
   },
-  {
+ /* {
     path: '/nested',
     component: Layout,
     redirect: '/nested/menu1',
@@ -181,9 +181,9 @@ export const constantRoutes = [
         meta: { title: 'menu2' }
       }
     ]
-  },
+  },*/
 
-  {
+ /* {
     path: 'external-link',
     component: Layout,
     children: [
@@ -192,7 +192,7 @@ export const constantRoutes = [
         meta: { title: 'External Link', icon: 'link' }
       }
     ]
-  },
+  },*/
 
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }

@@ -3,6 +3,7 @@
     <div class="background">
       <img src="@/assets/t.jpg" />
     </div>
+    <span id="time">{{ time }}</span>
     <div class="toolbar">
       <div v-show="initialSeen">
 <!--        <input id="hour" v-model="hour">
@@ -17,20 +18,18 @@
 
         <span id="secondlabel">秒</span>-->
 
-        <counter-button id="countup" text="开始" @click-button="startCountUp" />
-
 <!--        <counter-button id="countdown" text="开始倒计时" @click-button="startCountDown" />-->
       </div>
 
       <span v-show="hintSeen" id="hint">{{ hint }}</span>
-
+      <counter-button   v-show="initialSeen" id="countup" text="开始" @click-button="startCountUp" />
 <!--      <counter-button v-show="clearSeen" id="clear" :text="clearText" @click-button="clearCounter" />-->
       <counter-button v-show="pauseSeen" id="pause" text="暂停" @click-button="pauseCounter" />
 <!--      <counter-button v-show="restartSeen" id="restart" text="重新再计时" @click-button="restartCounter" />-->
       <counter-button v-show="resumeSeen" id="resume" text="恢复" @click-button="resumeCounter" />
       <counter-button v-show="!initialSeen" id="finish" text="完成" @click-button="finish" />
     </div>
-    <span id="time">{{ time }}</span>
+
   </div>
 </template>
 
@@ -302,8 +301,8 @@ body {
 }
 
 .toolbar {
-  width: 1220px;
-  height: 70px;
+  width: 100%;
+  height: 30%;
 }
 
 #hour {
@@ -367,10 +366,9 @@ body {
 }
 
 #time {
-  position: absolute;
-  right: 10px;
-  top: 2px;
-  font-size: 110px;
+  text-align: center;
+  display: block;
+  font-size: 80px;
   font-family: PTMono-Bold, "PT Mono", monospace;
   font-weight: 700;
   color: #3c5181;
@@ -384,16 +382,9 @@ body {
   font-size: 16px;
   color: white;
 }
-/*#finish {
-  width: fit-content;
-  position: absolute;
-  top: 400px;
-  font-size: 50px;
-  font-weight: 700;
-  color: #2188e9;
-  flex-direction: row-reverse;
-  flex-wrap: nowrap;
-}*/
+#finish {
+  text-align: center;
+}
 .background{
   width:100%;
   height:100%;  /**宽高100%是为了图片铺满屏幕 */
@@ -401,12 +392,20 @@ body {
   position: absolute;
 }
 button {
-  margin-left: 60px;
-  width: 15%;
+  width: 20%;
   color: red;
   background: antiquewhite;
   border-radius: 10px;
   margin-top: 40px;
+}
+div#countup {
+  text-align: center;
+}
+#pause{
+  text-align: center;
+}
+#resume{
+  text-align: center;
 }
 
 </style>
