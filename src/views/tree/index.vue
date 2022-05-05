@@ -1,78 +1,87 @@
 <template>
-  <div class="app-container">
-    <el-input v-model="filterText" placeholder="Filter keyword" style="margin-bottom:30px;" />
-
-    <el-tree
-      ref="tree2"
-      :data="data2"
-      :props="defaultProps"
-      :filter-node-method="filterNode"
-      class="filter-tree"
-      default-expand-all
-    />
-
-  </div>
+  <div id="container" />
 </template>
 
 <script>
+import * as Three from 'three'
 export default {
+
+  name: 'ThreeTest',
 
   data() {
     return {
-      filterText: '',
-      data2: [{
-        id: 1,
-        label: 'Level one 1',
-        children: [{
-          id: 4,
-          label: 'Level two 1-1',
-          children: [{
-            id: 9,
-            label: 'Level three 1-1-1'
-          }, {
-            id: 10,
-            label: 'Level three 1-1-2'
-          }]
-        }]
-      }, {
-        id: 2,
-        label: 'Level one 2',
-        children: [{
-          id: 5,
-          label: 'Level two 2-1'
-        }, {
-          id: 6,
-          label: 'Level two 2-2'
-        }]
-      }, {
-        id: 3,
-        label: 'Level one 3',
-        children: [{
-          id: 7,
-          label: 'Level two 3-1'
-        }, {
-          id: 8,
-          label: 'Level two 3-2'
-        }]
-      }],
-      defaultProps: {
-        children: 'children',
-        label: 'label'
-      }
-    }
-  },
-  watch: {
-    filterText(val) {
-      this.$refs.tree2.filter(val)
+
+      camera: null,
+
+      scene: null,
+
+      renderer: null,
+
+      mesh: null
+
     }
   },
 
+  mounted() {
+    this.init()
+
+    this.animate()
+  },
+
   methods: {
-    filterNode(value, data) {
-      if (!value) return true
-      return data.label.indexOf(value) !== -1
+
+    init() {
+      const container = document.getElementById('container')
+
+      this.camera = new Three.PerspectiveCamera(
+
+        70,
+
+        container.clientWidth / container.clientHeight,
+
+        0.01,
+
+        1000
+
+      )
+
+      this.camera.position.z = 0.6
+
+      this.scene = new Three.Scene()
+
+      const geometry = new Three.CylinderBufferGeometry(0.2, 0.2, 0.2)
+
+      const material = new Three.MeshNormalMaterial()
+
+      this.mesh = new Three.Mesh(geometry, material)
+
+      this.scene.add(this.mesh)
+
+      this.renderer = new Three.WebGLRenderer({ antialias: true })
+
+      this.renderer.setSize(container.clientWidth, container.clientHeight)
+
+      container.appendChild(this.renderer.domElement)
+    },
+
+    animate() {
+      requestAnimationFrame(this.animate)
+
+      this.mesh.rotation.x += 0.01
+
+      this.mesh.rotation.y += 0.02
+
+      this.renderer.render(this.scene, this.camera)
     }
+
   }
 }
 </script>
 
+<style >
+#container {
+
+  height: 400px;
+
+}
+</style>

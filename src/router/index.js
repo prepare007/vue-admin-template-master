@@ -124,6 +124,18 @@ export const constantRoutes = [
       }
     ]
   },
+  {
+    path: '/tree',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'table',
+        component: () => import('@/views/tree/index'),
+        meta: { title: '建筑', icon: 'tree' }
+      }
+    ]
+  },
  /* {
     path: '/nested',
     component: Layout,
