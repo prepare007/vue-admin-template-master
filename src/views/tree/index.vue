@@ -4,6 +4,8 @@
 
 <script>
 import * as Three from 'three'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 export default {
 
   name: 'ThreeTest',
@@ -35,42 +37,57 @@ export default {
 
       this.camera = new Three.PerspectiveCamera(
 
-        70,
+        45,
 
         container.clientWidth / container.clientHeight,
 
-        0.01,
+        0.1,
 
-        1000
+        5000
 
       )
 
-      this.camera.position.z = 0.6
+      this.camera.position.z = (container.clientWidth / container.clientHeight) * 100
+      this.camera.position.y = (container.clientHeight / 2) / this.camera.aspect
+      this.camera.position.x = (container.clientWidth / 2) / this.camera.aspect
 
       this.scene = new Three.Scene()
+      const loader = new GLTFLoader()
+      loader.load('/gltf/girlscene.gltf', (gltf) => {
+        const model = gltf.scene
+        // 添加这段代码
+        // 遍历模型每部分
+      /*  model.traverse((o) => {
+          // 将图片作为纹理加载
+          // eslint-disable-next-line no-undef
+          const explosionTexture = new Three.TextureLoader().load(
+            '/gltf/textures/lambert7SG_baseColor.png'
+          )
+          // 调整纹理图的方向
+          explosionTexture.flipY = true
+          // 将纹理图生成基础网格材质(MeshBasicMaterial)
+          const material = new Three.MeshBasicMaterial({
+            map: explosionTexture
+          })
+          // 给模型每部分上材质
+          o.material = material
+        })*/
 
-      const geometry = new Three.CylinderBufferGeometry(0.2, 0.2, 0.2)
-
-      const material = new Three.MeshNormalMaterial()
-
-      this.mesh = new Three.Mesh(geometry, material)
-
-      this.scene.add(this.mesh)
-
+        this.scene.add(model)
+        this.animate()
+      })
+      new Three.DirectionalLight(0xffffff, 1).add(this.scene)
       this.renderer = new Three.WebGLRenderer({ antialias: true })
 
       this.renderer.setSize(container.clientWidth, container.clientHeight)
 
       container.appendChild(this.renderer.domElement)
+      const control = new OrbitControls(this.camera, this.renderer.domElement)
+      control.addEventListener('change', this.animate)
     },
 
     animate() {
       requestAnimationFrame(this.animate)
-
-      this.mesh.rotation.x += 0.01
-
-      this.mesh.rotation.y += 0.02
-
       this.renderer.render(this.scene, this.camera)
     }
 
